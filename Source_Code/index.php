@@ -13,7 +13,10 @@
 		$username = "root";
 		$password = "";
 		$dbname = "softwaretesting";
-
+        $effort_theor=0.0;
+		$b0=50;
+		$bsize=0.45;
+		$kloc=0;
 
 		// Create connection
 		$conn = new mysqli($servername, $username, $password, $dbname);
@@ -548,7 +551,7 @@
 			}
 			else if($tid == 16){
 			$result1 = $conn->query("Select * from projects");
-				echo '<center><b>Use Case Point Calculation</b>';
+				echo '<center><b>Us Case Point Calculation</b>';
 				echo '<th>Project Name</th>';
 				echo '<th>UUCW</th>';
 				echo '<th>UAW</th>';
@@ -557,6 +560,7 @@
 				echo '<th>UCP</th>';
 				echo '<th>Productivity Factor</th>';
 				echo '<th>Effort</th>';
+				echo '<th>Feasibility</th>';
 				if($result->num_rows > 0){
 					echo '<tr>';
 					foreach($result as $row){
@@ -585,8 +589,26 @@
 						echo ($row["productivity_factor"]);
 						echo '</td>';
 						echo '<td>';
-						echo ($row["effort"]);	
+						echo ($row["effort"]);
 						echo '</td>';
+						if($row1["name"]=="Online Book Pubishing and Purchasing"){
+							$kloc=1050;
+							
+						}
+						else if($row1["name"]=="DVD Rental System"){
+							
+						}
+						if($row["effort"]>={$bsize*$kloc+$b0}){
+							
+						echo '<td>';
+						echo ("feasible");
+                        echo '</td>';						
+						}
+						else{
+						echo '<td>';
+						echo ("not feasible");
+                        echo '</td>';
+						}
 						echo '</tr>';
 					}
 				}
